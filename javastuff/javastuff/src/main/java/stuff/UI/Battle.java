@@ -4,9 +4,7 @@ import java.util.Scanner;
 
 import stuff.Entities.*;
 import stuff.Entities.Bosses.FallenWarrior;
-import stuff.Entities.Mobs.Skeleton;
-import stuff.Entities.Mobs.Spider;
-import stuff.Entities.Mobs.Zombie;
+import stuff.Entities.Mobs.*;
 import stuff.Utilities.*;
 
 public class Battle {
@@ -20,6 +18,7 @@ public class Battle {
         System.out.println("> (1) Zombie");
         System.out.println("> (2) Skeleton");
         System.out.println("> (3) Spider");
+        System.out.println("> (4) Spirit");
 
         System.out.println(" ");
 
@@ -27,7 +26,7 @@ public class Battle {
 
         System.out.println(" ");
 
-        System.out.println("> (4) Exit");
+        System.out.println("> (5) Exit");
 
         System.out.println(" ");
         System.out.println("*********************************");
@@ -41,6 +40,8 @@ public class Battle {
         } else if (choice == 3) {
             battle(input, plr, new Spider(110, 15, 35, 80));
         } else if (choice == 4) {
+            battle(input, plr, new Spirit(170, 14, 57, 118))
+        } else if (choice == 5) {
             new Menu().menu(input, plr);
         } else if (choice == 10) {
             battle(input, plr, new FallenWarrior(1750, 82, 450, 1250));
