@@ -5,6 +5,7 @@ import java.util.Scanner;
 import stuff.Entities.Player;
 import stuff.UI.Balance;
 import stuff.UI.Battle;
+import stuff.UI.Level;
 import stuff.UI.Upgrades;
 
 public class Game {
@@ -25,6 +26,7 @@ public class Game {
         System.out.println("> (1) Check Balance");
         System.out.println("> (2) Battle");
         System.out.println("> (3) Upgrades");
+        System.out.println("> (4) Level");
 
         System.out.println(" ");
         System.out.println("*********************************");
@@ -37,6 +39,8 @@ public class Game {
             new Battle().menu(input, plr);
         } else if (choice == 3) {
             new Upgrades().menu(input, plr);
+        } else if (choice == 4) {
+            new Level().menu(input, plr);
         }
         input.close();
     }

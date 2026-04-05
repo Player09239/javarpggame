@@ -5,6 +5,7 @@ public class Enemy {
     protected int hp;
     protected int atk;
     protected String name;
+    protected int level = 1;
 
     protected int mincash;
     protected int maxcash;
@@ -57,5 +58,21 @@ public class Enemy {
 
     public int rewardCash() {
         return (int)(Math.random() * (maxcash - mincash + 1)) + mincash;
+    }
+
+    public void setLevel(int lv) {
+        level = lv;
+    } 
+
+    public void scale() {
+        maxhp = (int)(maxhp * (level * 1.12));
+        atk = (int)(atk * (level * 1.12));
+        mincash = (int)(mincash * (level * 1.107));
+        maxcash = (int)(maxcash * (level * 1.107));
+        hp = maxhp;
+    }
+
+    public int getLevel() {
+        return level;
     }
 }

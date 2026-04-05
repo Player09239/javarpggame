@@ -49,7 +49,7 @@ public class Upgrades {
         if (plr.getCash() >= ((int) Math.pow(plr.getHealthLv(), 1.1) + 50)) {
             plr.removeCash(((int) Math.pow(plr.getHealthLv(), 1.1) + 50));
             plr.addHealthLv(1);
-            plr.changeMaxHealth(100 + (plr.getHealthLv() * 22));
+            plr.scale();
 
             menu(input, plr);
         } else {
@@ -68,7 +68,7 @@ public class Upgrades {
         if (plr.getCash() >= ((int) Math.pow(plr.getAtkLv(), 1.1) + 50)) {
             plr.removeCash(((int) Math.pow(plr.getAtkLv(), 1.1) + 50));
             plr.addAtkLv(1);
-            plr.changeAtk((plr.getAtkLv() * 5) + 7);
+            plr.scale();
 
             menu(input, plr);
         } else {
