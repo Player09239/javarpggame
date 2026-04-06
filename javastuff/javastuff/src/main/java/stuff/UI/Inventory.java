@@ -3,7 +3,7 @@ package stuff.UI;
 import java.util.Scanner;
 
 import stuff.Entities.Player;
-import stuff.Inventory.Item;
+import stuff.Inventory.BaseItemClasses.Item;
 import stuff.Utilities.Util;
 
 public class Inventory {

@@ -5,7 +5,7 @@ import java.util.Scanner;
 import stuff.Entities.*;
 import stuff.Entities.Bosses.FallenWarrior;
 import stuff.Entities.Mobs.*;
-import stuff.Inventory.Item;
+import stuff.Inventory.BaseItemClasses.Item;
 import stuff.Inventory.Items.*;
 import stuff.Utilities.*;
 
@@ -209,7 +209,7 @@ public class Battle {
             System.out.println(" ");
 
             System.out.println("| Player deals " + plr.getAtk() + " damage to " + enemy.getName());
-            System.out.println("| " + enemy.getName() + " deals " + enemy.getAtk() + " damage to Player");
+            System.out.println(enemyAction);
             System.out.println("| Player dies");
 
             System.out.println(" ");

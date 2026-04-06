@@ -1,4 +1,4 @@
-package stuff.Inventory;
+package stuff.Inventory.BaseItemClasses;
 public class Item {
     protected String name;
     protected long amt;
@@ -14,6 +14,9 @@ public class Item {
 
     public void removeStackAmt(long amount) {
         amt -= amount;
+        if (amt <= 0) {
+            
+        }
     }
 
     public String itemName() {
@@ -22,5 +25,9 @@ public class Item {
 
     public long amount() {
         return amt;
+    }
+
+    public void setStackamt(long amount) {
+        amt = amount;
     }
 }

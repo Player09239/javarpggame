@@ -1,6 +1,7 @@
 package stuff.Entities;
 
-import stuff.Inventory.Item;
+import stuff.Inventory.BaseItemClasses.Item;
+import stuff.Utilities.*;
 
 public class Enemy {
     protected long maxhp;
@@ -22,6 +23,20 @@ public class Enemy {
         this.maxcash = maxcash;
     }
 
+    static String colorHp(long max, long hp) {
+        double pct = (double) hp / max * 100;
+
+        if (pct > 75) {
+            return Color.green(new Util().abbreviate(hp));
+        } else if (pct > 50) {
+            return Color.yellow(new Util().abbreviate(hp));
+        } else if (pct > 25) {
+            return Color.orange(new Util().abbreviate(hp));
+        } else {
+            return Color.red(new Util().abbreviate(hp));
+        }
+    }
+
     public void takeDamage(long dmg) {
         hp -= dmg;
     }
@@ -31,7 +46,7 @@ public class Enemy {
     }
 
     public String displayHealth() {
-        return ":: Health   " + hp + "/" + maxhp + " ::";
+        return ":: Health   " + colorHp(maxhp, hp) + "/" + new Util().abbreviate(maxhp) + " ::";
     }
 
     public long getAtk() {

@@ -13,27 +13,37 @@ public class Util {
     public String bar(long hp, long maxHp) {
         double pct = (hp / (double) maxHp) * 100;
 
-        if (pct >= 100) return "[████████████████████] 100%";
-        if (pct >= 95)  return "[███████████████████ ] " + (long)pct + "%";
-        if (pct >= 90)  return "[██████████████████  ] " + (long)pct + "%";
-        if (pct >= 85)  return "[█████████████████   ] " + (long)pct + "%";
-        if (pct >= 80)  return "[████████████████    ] " + (long)pct + "%";
-        if (pct >= 75)  return "[███████████████     ] " + (long)pct + "%";
-        if (pct >= 70)  return "[██████████████      ] " + (long)pct + "%";
-        if (pct >= 65)  return "[█████████████       ] " + (long)pct + "%";
-        if (pct >= 60)  return "[████████████        ] " + (long)pct + "%";
-        if (pct >= 55)  return "[███████████         ] " + (long)pct + "%";
-        if (pct >= 50)  return "[██████████          ] " + (long)pct + "%";
-        if (pct >= 45)  return "[█████████           ] " + (long)pct + "%";
-        if (pct >= 40)  return "[████████            ] " + (long)pct + "%";
-        if (pct >= 35)  return "[███████             ] " + (long)pct + "%";
-        if (pct >= 30)  return "[██████              ] " + (long)pct + "%";
-        if (pct >= 25)  return "[█████               ] " + (long)pct + "%";
-        if (pct >= 20)  return "[████                ] " + (long)pct + "%";
-        if (pct >= 15)  return "[███                 ] " + (long)pct + "%";
-        if (pct >= 10)  return "[██                  ] " + (long)pct + "%";
-        if (pct >= 5)   return "[█                   ] " + (long)pct + "%";
+        if (pct >= 100) return Color.green("[████████████████████] 100%");
+        if (pct >= 95)  return Color.green("[███████████████████ ] " + (long)pct + "%");
+        if (pct >= 90)  return Color.green("[██████████████████  ] " + (long)pct + "%");
+        if (pct >= 85)  return Color.green("[█████████████████   ] " + (long)pct + "%");
+        if (pct >= 80)  return Color.green("[████████████████    ] " + (long)pct + "%");
+        if (pct >= 75)  return Color.green("[███████████████     ] " + (long)pct + "%");
+        if (pct >= 70)  return Color.yellow("[██████████████      ] " + (long)pct + "%");
+        if (pct >= 65)  return Color.yellow("[█████████████       ] " + (long)pct + "%");
+        if (pct >= 60)  return Color.yellow("[████████████        ] " + (long)pct + "%");
+        if (pct >= 55)  return Color.yellow("[███████████         ] " + (long)pct + "%");
+        if (pct >= 50)  return Color.yellow("[██████████          ] " + (long)pct + "%");
+        if (pct >= 45)  return Color.orange("[█████████           ] " + (long)pct + "%");
+        if (pct >= 40)  return Color.orange("[████████            ] " + (long)pct + "%");
+        if (pct >= 35)  return Color.orange("[███████             ] " + (long)pct + "%");
+        if (pct >= 30)  return Color.orange("[██████              ] " + (long)pct + "%");
+        if (pct >= 25)  return Color.red("[█████               ] " + (long)pct + "%");
+        if (pct >= 20)  return Color.red("[████                ] " + (long)pct + "%");
+        if (pct >= 15)  return Color.red("[███                 ] " + (long)pct + "%");
+        if (pct >= 10)  return Color.red("[██                  ] " + (long)pct + "%");
+        if (pct >= 5)   return Color.red("[█                   ] " + (long)pct + "%");
 
-        return "[                    ] 0%";
+        return Color.red("[                    ] 0%");
+    }
+
+    public String abbreviate(long n) {
+        if (n < 1000) return Long.toString(n);
+
+        final String[] units = {"", "K", "M", "B", "T", "Qa", "Qi"};
+        int unitIndex = (int) (Math.log10(n) / 3);
+        double scaled = n / Math.pow(1000, unitIndex);
+
+        return String.format("%.1f%s", scaled, units[unitIndex]);
     }
 }

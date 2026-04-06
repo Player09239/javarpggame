@@ -1,7 +1,7 @@
 package stuff.Entities.Mobs;
 
 import stuff.Entities.Enemy;
-import stuff.Inventory.Item;
+import stuff.Inventory.BaseItemClasses.Item;
 import stuff.Inventory.Items.RottenFlesh;
 import stuff.Inventory.Items.Wood;
 

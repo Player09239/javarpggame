@@ -3,9 +3,10 @@ package stuff;
 import java.util.Scanner;
 
 import stuff.Entities.Player;
-import stuff.UI.*;
+import stuff.UI.Menu;
 
 public class Game {
+    @SuppressWarnings("ConvertToTryWithResources")
     public void start() {
         Scanner input = new Scanner(System.in);
 
