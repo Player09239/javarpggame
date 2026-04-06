@@ -5,6 +5,8 @@ import java.util.Scanner;
 import stuff.Entities.*;
 import stuff.Entities.Bosses.FallenWarrior;
 import stuff.Entities.Mobs.*;
+import stuff.Inventory.Item;
+import stuff.Inventory.Items.*;
 import stuff.Utilities.*;
 
 public class Battle {
@@ -31,20 +33,51 @@ public class Battle {
         System.out.println(" ");
         System.out.println("*********************************");
 
-        int choice = input.nextInt();
+        long choice = input.nextInt();
 
         if (choice == 1) {
-            battle(input, plr, new Zombie(90, 6, 10, 30));
+            level(input, plr, new Zombie(90, 6, 10, 30));
         } else if (choice == 2) {
-            battle(input, plr, new Skeleton(125, 9, 20, 55));
+            level(input, plr, new Skeleton(125, 9, 20, 55));
         } else if (choice == 3) {
-            battle(input, plr, new Spider(110, 15, 35, 80));
+            level(input, plr, new Spider(110, 15, 35, 80));
         } else if (choice == 4) {
-            battle(input, plr, new Spirit(170, 14, 57, 118));
+            level(input, plr, new Spirit(170, 14, 57, 118));
         } else if (choice == 5) {
             new Menu().menu(input, plr);
         } else if (choice == 10) {
-            battle(input, plr, new FallenWarrior(1750, 82, 450, 1250));
+            level(input, plr, new FallenWarrior(1750, 82, 450, 1250));
+        }
+    }
+
+    private void level(Scanner input, Player plr, Enemy enemy) {
+        System.out.println("*********************************");
+        System.out.println(" ");
+
+        System.out.println(":: MOB LEVEL ::");
+
+        System.out.println(" ");
+
+        System.out.println("Please type a level for the mob. (Min. 1)");
+
+        System.out.println(" ");
+        
+        System.out.println("> (0) Exit");
+
+        System.out.println(" ");
+        System.out.println("*********************************");
+        System.out.print("> ");
+
+        long choice = input.nextInt();
+
+        if (choice == 0) {
+            new Menu().menu(input, plr);
+        } else if (choice >= 1) {
+            enemy.setLevel(choice);
+            battle(input, plr, enemy);
+        } else {
+            level(input, plr, enemy);
+            System.out.print("why.");
         }
     }
 
@@ -64,7 +97,7 @@ public class Battle {
 
         System.out.println(" ");
 
-        System.out.println("> Player");
+        System.out.println("> [Lv." + plr.getLevel() + "] Player");
         System.out.println("    " + plr.displayHealth());
         System.out.println("    " + new Util().bar(plr.getHp(), plr.getMaxHp()));
 
@@ -84,7 +117,7 @@ public class Battle {
         System.out.println(" ");
         System.out.println("*********************************");
 
-        int choice = input.nextInt();
+        long choice = input.nextInt();
         
         if (choice == 1) {
             attack(input, plr, enemy);
@@ -101,7 +134,7 @@ public class Battle {
     }
 
     private void attack(Scanner input, Player plr, Enemy enemy) {
-        int enemyDamage = enemy.getAtk();
+        long enemyDamage = enemy.getAtk();
         String enemyAction = "| " + enemy.getName() + " deals " + enemyDamage + " damage to Player";
         
         if (enemy instanceof FallenWarrior) {
@@ -130,7 +163,7 @@ public class Battle {
 
             System.out.println(" ");
 
-            System.out.println("> Player");
+            System.out.println("> [Lv." + plr.getLevel() + "] Player");
             System.out.println("    " + plr.displayHealth());
             System.out.println("    " + new Util().bar(plr.getHp(), plr.getMaxHp()));
 
@@ -150,7 +183,7 @@ public class Battle {
             System.out.println(" ");
             System.out.println("*********************************");
 
-            int choice = input.nextInt();
+            long choice = input.nextInt();
 
             if (choice == 1) {
                 attack(input, plr, enemy);
@@ -181,7 +214,7 @@ public class Battle {
 
             System.out.println(" ");
 
-            System.out.println("> [DEAD] Player");
+            System.out.println("> [DEAD] [Lv." + plr.getLevel() + "] Player");
             System.out.println("    " + plr.displayHealth());
             System.out.println("    " + new Util().bar(plr.getHp(), plr.getMaxHp()));
 
@@ -200,16 +233,17 @@ public class Battle {
             System.out.println(" ");
             System.out.println("*********************************");
 
-            int choice = input.nextInt();
+            long choice = input.nextInt();
 
             if (choice == 1) {
                 new Menu().menu(input, plr);
             }
         } else if (!enemy.checkIfAlive()) {
-            int cashreward = enemy.rewardCash();
+            long cashreward = enemy.rewardCash();
             plr.addCash(cashreward);
-            int xpreward = (int)((enemy.getLevel() * 1.5) + (enemy.getAtk() * 1.3));
+            long xpreward = (long)((enemy.getLevel() * 1.5) + (enemy.getAtk() * 1.3));
             plr.addXp(xpreward);
+            Item[] loot = enemy.dropItems();
 
             System.out.println("*********************************");
             System.out.println(" ");
@@ -218,7 +252,18 @@ public class Battle {
             System.out.println(" ");
 
             System.out.println("VICTORY. Click 1 to exit");
-            System.out.println("Reward: $" + cashreward + ", " + xpreward + " XP");
+
+            System.out.println(" ");
+
+            System.out.println("Rewards:");
+            System.out.println("$" + cashreward);
+            System.out.println(xpreward + " XP");
+            for (Item v : loot) {
+                if (v != null) {
+                    System.out.println(v.itemName() + " - x" + v.amount());
+                    plr.addtoInventory(v);
+                }
+            }
 
             System.out.println(" ");
 
@@ -227,7 +272,7 @@ public class Battle {
 
             System.out.println(" ");
 
-            System.out.println("> Player");
+            System.out.println("> [Lv." + plr.getLevel() + "] Player");
             System.out.println("    " + plr.displayHealth());
             System.out.println("    " + new Util().bar(plr.getHp(), plr.getMaxHp()));
 
@@ -246,7 +291,7 @@ public class Battle {
             System.out.println(" ");
             System.out.println("*********************************");
 
-            int choice = input.nextInt();
+            long choice = input.nextInt();
 
             if (choice == 1) {
                 new Menu().menu(input, plr);

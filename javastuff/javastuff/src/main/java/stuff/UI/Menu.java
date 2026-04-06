@@ -19,11 +19,12 @@ public class Menu {
         System.out.println("> (2) Battle");
         System.out.println("> (3) Upgrades");
         System.out.println("> (4) Level");
+        System.out.println("> (5) Inventory");
 
         System.out.println(" ");
         System.out.println("*********************************");
 
-        int choice = input.nextInt();
+        long choice = input.nextInt();
 
         if (choice == 1) {
             new Balance().menu(input, plr);
@@ -33,6 +34,8 @@ public class Menu {
             new Upgrades().menu(input, plr);
         } else if (choice == 4) {
             new Level().menu(input, plr);
+        } else if (choice == 5) {
+            new Inventory().menu(input, plr);
         }
         
         input.close();

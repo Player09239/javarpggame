@@ -3,10 +3,7 @@ package stuff;
 import java.util.Scanner;
 
 import stuff.Entities.Player;
-import stuff.UI.Balance;
-import stuff.UI.Battle;
-import stuff.UI.Level;
-import stuff.UI.Upgrades;
+import stuff.UI.*;
 
 public class Game {
     public void start() {
@@ -19,28 +16,15 @@ public class Game {
         System.out.println("*********************************");
         System.out.println(" ");
 
-        System.out.println(":: MENU ::");
-
-        System.out.println(" ");
-
-        System.out.println("> (1) Check Balance");
-        System.out.println("> (2) Battle");
-        System.out.println("> (3) Upgrades");
-        System.out.println("> (4) Level");
+        System.out.println("Welcome to Java RPG, a text-based rpg game made entirely out of Java (ofc). Click 1 to get started.");
 
         System.out.println(" ");
         System.out.println("*********************************");
 
-        int choice = input.nextInt();
+        long choice = input.nextInt();
 
         if (choice == 1) {
-            new Balance().menu(input, plr);
-        } else if (choice == 2) {
-            new Battle().menu(input, plr);
-        } else if (choice == 3) {
-            new Upgrades().menu(input, plr);
-        } else if (choice == 4) {
-            new Level().menu(input, plr);
+            new Menu().menu(input, plr);
         }
         input.close();
     }

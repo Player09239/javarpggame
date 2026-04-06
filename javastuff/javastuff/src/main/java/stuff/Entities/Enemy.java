@@ -1,16 +1,18 @@
 package stuff.Entities;
 
+import stuff.Inventory.Item;
+
 public class Enemy {
-    protected int maxhp;
-    protected int hp;
-    protected int atk;
+    protected long maxhp;
+    protected long hp;
+    protected long atk;
     protected String name;
-    protected int level = 1;
+    protected long level = 1;
 
-    protected int mincash;
-    protected int maxcash;
+    protected long mincash;
+    protected long maxcash;
 
-    public Enemy(int maxhp, int atk, String name, int mincash, int maxcash) {
+    public Enemy(long maxhp, long atk, String name, long mincash, long maxcash) {
         this.maxhp = maxhp;
         this.hp = maxhp;
         this.atk = atk;
@@ -20,7 +22,7 @@ public class Enemy {
         this.maxcash = maxcash;
     }
 
-    public void takeDamage(int dmg) {
+    public void takeDamage(long dmg) {
         hp -= dmg;
     }
 
@@ -32,7 +34,7 @@ public class Enemy {
         return ":: Health   " + hp + "/" + maxhp + " ::";
     }
 
-    public int getAtk() {
+    public long getAtk() {
         return atk;
     }
 
@@ -40,15 +42,15 @@ public class Enemy {
         hp = maxhp;
     }
 
-    public void changeMaxHealth(int newHp) {
+    public void changeMaxHealth(long newHp) {
         maxhp = newHp;
     }
 
-    public int getHp() {
+    public long getHp() {
         return hp;
     }
 
-    public int getMaxHp() {
+    public long getMaxHp() {
         return maxhp;
     }
 
@@ -56,23 +58,27 @@ public class Enemy {
         return name;
     }
 
-    public int rewardCash() {
-        return (int)(Math.random() * (maxcash - mincash + 1)) + mincash;
+    public long rewardCash() {
+        return (long)(Math.random() * (maxcash - mincash + 1)) + mincash;
     }
 
-    public void setLevel(int lv) {
+    public void setLevel(long lv) {
         level = lv;
     } 
 
     public void scale() {
-        maxhp = (int)(maxhp * (level * 1.12));
-        atk = (int)(atk * (level * 1.12));
-        mincash = (int)(mincash * (level * 1.107));
-        maxcash = (int)(maxcash * (level * 1.107));
+        maxhp = (long)(maxhp * (level * 1.12));
+        atk = (long)(atk * (level * 1.12));
+        mincash = (long)(mincash * (level * 1.107));
+        maxcash = (long)(maxcash * (level * 1.107));
         hp = maxhp;
     }
 
-    public int getLevel() {
+    public long getLevel() {
         return level;
+    }
+
+    public Item[] dropItems() {
+        return new Item[0];
     }
 }

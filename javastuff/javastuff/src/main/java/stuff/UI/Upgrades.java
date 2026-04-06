@@ -17,13 +17,13 @@ public class Upgrades {
 
         System.out.println("> Health");
         System.out.println("    | Lv. " + plr.getHealthLv());
-        System.out.println("    | $" + ((int) Math.pow(plr.getHealthLv(), 1.1) + 50));
+        System.out.println("    | $" + ((long) Math.pow(plr.getHealthLv(), 1.1) + 50));
 
         System.out.println(" ");
 
         System.out.println("> Attack");
         System.out.println("    | Lv. " + plr.getAtkLv());
-        System.out.println("    | $" + ((int) Math.pow(plr.getAtkLv(), 1.1) + 50));
+        System.out.println("    | $" + ((long) Math.pow(plr.getAtkLv(), 1.1) + 50));
 
         System.out.println(" ");
         
@@ -34,20 +34,20 @@ public class Upgrades {
         System.out.println(" ");
         System.out.println("*********************************");
 
-        int choice = input.nextInt();
+        long choice = input.nextInt();
 
         if (choice == 1) {
-            upgradeAtk(input, plr);
-        } else if (choice == 2) {
             upgradeHealth(input, plr);
+        } else if (choice == 2) {
+            upgradeAtk(input, plr);
         } else if (choice == 3) {
             new Menu().menu(input, plr);
         }
     }
 
     private void upgradeHealth(Scanner input, Player plr) {
-        if (plr.getCash() >= ((int) Math.pow(plr.getHealthLv(), 1.1) + 50)) {
-            plr.removeCash(((int) Math.pow(plr.getHealthLv(), 1.1) + 50));
+        if (plr.getCash() >= ((long) Math.pow(plr.getHealthLv(), 1.1) + 50)) {
+            plr.removeCash(((long) Math.pow(plr.getHealthLv(), 1.1) + 50));
             plr.addHealthLv(1);
             plr.scale();
 
@@ -65,8 +65,8 @@ public class Upgrades {
     }
 
     private void upgradeAtk(Scanner input, Player plr) {
-        if (plr.getCash() >= ((int) Math.pow(plr.getAtkLv(), 1.1) + 50)) {
-            plr.removeCash(((int) Math.pow(plr.getAtkLv(), 1.1) + 50));
+        if (plr.getCash() >= ((long) Math.pow(plr.getAtkLv(), 1.1) + 50)) {
+            plr.removeCash(((long) Math.pow(plr.getAtkLv(), 1.1) + 50));
             plr.addAtkLv(1);
             plr.scale();
 

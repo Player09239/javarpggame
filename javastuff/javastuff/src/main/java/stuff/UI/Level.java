@@ -16,7 +16,7 @@ public class Level {
         System.out.println(" ");
         
         System.out.println("> Level " + plr.getLevel());
-        System.out.println("    :: XP   " + plr.getXp() + "/" + (int)(Math.pow(plr.getLevel(), 1.26) + 50) + " ");
+        System.out.println("    :: XP   " + plr.getXp() + "/" + (long)(Math.pow(plr.getLevel(), 1.26) + 50) + " ::");
 
         System.out.println(" ");
 
@@ -25,7 +25,7 @@ public class Level {
         System.out.println(" ");
         System.out.println("*********************************");
 
-        int choice = input.nextInt();
+        long choice = input.nextInt();
 
         if (choice == 1) {
             new Menu().menu(input, plr);

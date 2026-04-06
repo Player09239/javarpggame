@@ -1,27 +1,36 @@
 package stuff.Entities;
 
-public class Player {
-    private int maxhp;
-    private int hp;
-    private int atk;
-    private int cash;
-    private int level;
-    private int xp;
+import stuff.Inventory.Item;
 
-    private int healthlv;
-    private int atklv;
+public class Player {
+    private long maxhp;
+    private long hp;
+    private long atk;
+    private long cash;
+    private long level = 100000;
+    private long xp;
+
+    private String headSlot = "None";
+    private String chestSlot = "None";
+    private String leggingsSlot = "None";
+    private String bootsSlot = "None";
+
+    private Item[] inventory = new Item[100];
+
+    private long healthlv;
+    private long atklv;
     
-    public Player(int maxhp, int atk) {
+    public Player(long maxhp, long atk) {
         this.maxhp = maxhp;
         this.hp = maxhp;
         this.atk = atk;
         this.cash = 0;
 
-        this.healthlv = 23435333;
+        this.healthlv = 1;
         this.atklv = 1;
     }
 
-    public void takeDamage(int dmg) {
+    public void takeDamage(long dmg) {
         hp -= dmg;
     }
 
@@ -33,19 +42,19 @@ public class Player {
         return ":: Health   " + hp + "/" + maxhp + " ::";
     }
 
-    public int getAtk() {
+    public long getAtk() {
         return atk;
     }
 
-    public int getCash() {
+    public long getCash() {
         return cash;
     }
 
-    public void addCash(int amount) {
+    public void addCash(long amount) {
         cash += amount;
     }
 
-    public void removeCash(int amount) {
+    public void removeCash(long amount) {
         cash -= amount;
     }
 
@@ -53,53 +62,53 @@ public class Player {
         hp = maxhp;
     }
 
-    public int getAtkLv() {
+    public long getAtkLv() {
         return atklv;
     }
 
-    public int getHealthLv() {
+    public long getHealthLv() {
         return healthlv;
     }
 
-    public void addHealthLv(int amount) {
+    public void addHealthLv(long amount) {
         healthlv += amount;
     }
 
-    public void addAtkLv(int amount) {
+    public void addAtkLv(long amount) {
         atklv += amount;
     }
 
-    public void changeMaxHealth(int newHp) {
+    public void changeMaxHealth(long newHp) {
         maxhp = newHp;
     }
 
-    public void changeAtk(int newatk) {
+    public void changeAtk(long newatk) {
         atk = newatk;
     }
 
-    public int getHp() {
+    public long getHp() {
         return hp;
     }
 
-    public int getMaxHp() {
+    public long getMaxHp() {
         return maxhp;
     }
 
-    public int getLevel() {
+    public long getLevel() {
         return level;
     }
 
-    public int getXp() {
+    public long getXp() {
         return xp;
     }
 
     public void scale() {
-        maxhp = (int)(maxhp * ((level * 1.12) * (healthlv * 1.29)));
-        atk = (int)(atk * (level * 1.12) * (atklv * 1.29));
+        maxhp = (long)(100 * ((level * 1.12) * (healthlv * 1.29)));
+        atk = (long)(7 * (level * 1.12) * (atklv * 1.29));
         hp = maxhp;
     }
 
-    public void addXp(int amt) {
+    public void addXp(long amt) {
         xp += amt;
 
         while (xp >= Math.pow(level, 1.26) + 50) {
@@ -108,5 +117,31 @@ public class Player {
         }
 
         scale();
+    }
+
+    public void addtoInventory(Item item) {
+        boolean added = false;
+        for (Item v : inventory) {
+            if (v != null && v.getClass() == item.getClass()) {
+                v.addtoStack(item.amount());
+                added = true;
+                break;
+            }
+        }
+
+        if (!added) {
+            for (int i = 0; i < 100; i++) {
+                if (inventory[i] == null) {
+                    inventory[i] = item;
+                    added = true;
+                    break;
+                }
+            }
+            if (!added) System.out.println("WARN   | Inventory Full.");
+        }
+    }
+
+    public Item[] getInventory() {
+        return inventory;
     }
 }

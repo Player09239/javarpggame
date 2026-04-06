@@ -26,7 +26,7 @@ public class Balance {
         System.out.println(" ");
         System.out.println("*********************************");
 
-        int choice = input.nextInt();
+        long choice = input.nextInt();
 
         if (choice == 1) {
             new Menu().menu(input, plr);
