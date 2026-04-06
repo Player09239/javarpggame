@@ -29,6 +29,6 @@ public class Level {
 
         if (choice == 1) {
             new Menu().menu(input, plr);
-        }
+        } else menu(input, plr);
     }
 }

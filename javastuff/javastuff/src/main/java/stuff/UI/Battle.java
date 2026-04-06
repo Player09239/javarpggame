@@ -6,6 +6,7 @@ import stuff.Entities.*;
 import stuff.Entities.Bosses.FallenWarrior;
 import stuff.Entities.Mobs.*;
 import stuff.Inventory.BaseItemClasses.Item;
+import stuff.Inventory.Gear.*;
 import stuff.Inventory.Items.*;
 import stuff.Utilities.*;
 
@@ -47,7 +48,7 @@ public class Battle {
             new Menu().menu(input, plr);
         } else if (choice == 10) {
             level(input, plr, new FallenWarrior(1750, 82, 450, 1250));
-        }
+        } else menu(input, plr);
     }
 
     private void level(Scanner input, Player plr, Enemy enemy) {
@@ -130,7 +131,7 @@ public class Battle {
             System.out.println(" ");
 
             new Menu().menu(input, plr);
-        }
+        } else battle(input, plr, enemy);
     }
 
     private void attack(Scanner input, Player plr, Enemy enemy) {
@@ -196,7 +197,7 @@ public class Battle {
                 System.out.println(" ");
 
                 new Menu().menu(input, plr);
-            }
+            } else attack(input, plr, enemy);
         } else if (!plr.checkIfAlive()) {
             System.out.println("*********************************");
             System.out.println(" ");
@@ -237,13 +238,17 @@ public class Battle {
 
             if (choice == 1) {
                 new Menu().menu(input, plr);
-            }
+            } else attack(input, plr, enemy);
         } else if (!enemy.checkIfAlive()) {
             long cashreward = enemy.rewardCash();
             plr.addCash(cashreward);
             long xpreward = (long)((enemy.getLevel() * 1.5) + (enemy.getAtk() * 1.3));
             plr.addXp(xpreward);
             Item[] loot = enemy.dropItems();
+            plr.addtoInventory(new WoodenHelmet(1)); // temp
+            plr.addtoInventory(new WoodenChestplate(1)); // temp
+            plr.addtoInventory(new WoodenLeggings(1)); // temp
+            plr.addtoInventory(new WoodenBoots(1)); // temp
 
             System.out.println("*********************************");
             System.out.println(" ");
@@ -295,7 +300,7 @@ public class Battle {
 
             if (choice == 1) {
                 new Menu().menu(input, plr);
-            }
+            } else attack(input, plr, enemy);
         }
 
     }

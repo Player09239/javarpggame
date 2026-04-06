@@ -9,13 +9,18 @@ public class Player {
     private long hp;
     private long atk;
     private long cash;
-    private long level = 100000;
+    private long level = 1;
     private long xp;
+    private long defense;
+    private long realhp;
 
     private Item headSlot;
     private Item chestSlot;
     private Item leggingsSlot;
     private Item bootsSlot;
+
+    private int hpBuff = 0;
+    private int atkBuff = 0;
 
     private Item[] inventory = new Item[100];
 
@@ -27,35 +32,38 @@ public class Player {
         this.hp = maxhp;
         this.atk = atk;
         this.cash = 0;
+        this.realhp = maxhp;
 
         this.healthlv = 1;
         this.atklv = 1;
     }
 
-    static String colorHp(long max, long hp) {
-        double pct = (double) hp / max * 100;
+    static String colorHp(long max, long realhp) {
+        double pct = (double) realhp / max * 100;
 
-        if (pct > 75) {
-            return Color.green(new Util().abbreviate(hp));
+        if (pct > 100) {
+            return Color.cyan(new Util().abbreviate(realhp));
+        } else if (pct > 75) {
+            return Color.green(new Util().abbreviate(realhp));
         } else if (pct > 50) {
-            return Color.yellow(new Util().abbreviate(hp));
+            return Color.yellow(new Util().abbreviate(realhp));
         } else if (pct > 25) {
-            return Color.orange(new Util().abbreviate(hp));
+            return Color.orange(new Util().abbreviate(realhp));
         } else {
-            return Color.red(new Util().abbreviate(hp));
+            return Color.red(new Util().abbreviate(realhp));
         }
     }
 
     public void takeDamage(long dmg) {
-        hp -= dmg;
+        realhp -= dmg;
     }
 
     public boolean checkIfAlive() {
-        return hp > 0;
+        return realhp > 0;
     }
 
     public String displayHealth() {
-        return ":: Health   " + colorHp(maxhp, hp) + "/" + new Util().abbreviate(maxhp) + " ::";
+        return ":: Health   " + colorHp(maxhp, realhp) + "/" + new Util().abbreviate(maxhp) + " ::";
     }
 
     public long getAtk() {
@@ -64,6 +72,10 @@ public class Player {
 
     public long getCash() {
         return cash;
+    }
+
+    public long getDefense() {
+        return defense;
     }
 
     public void addCash(long amount) {
@@ -103,7 +115,7 @@ public class Player {
     }
 
     public long getHp() {
-        return hp;
+        return realhp;
     }
 
     public long getMaxHp() {
@@ -119,9 +131,34 @@ public class Player {
     }
 
     public void scale() {
-        maxhp = (long)(100 * ((level * 1.12) * (healthlv * 1.29)));
-        atk = (long)(7 * (level * 1.12) * (atklv * 1.29));
+        maxhp = (long)(100 * ((level * 1.06) * (healthlv * 1.13)));
+        atk = (long)(7 * (level * 1.06) * (atklv * 1.13));
         hp = maxhp;
+
+        int atkBuff = 0;
+        long newDefense = 0;
+
+        if (headSlot != null) {
+            atkBuff += headSlot.getAtkBuff();
+            newDefense += headSlot.getHpBuff();
+        }
+        if (chestSlot != null) {
+            atkBuff += chestSlot.getAtkBuff();
+            newDefense += chestSlot.getHpBuff();
+        }
+        if (leggingsSlot != null) {
+            atkBuff += leggingsSlot.getAtkBuff();
+            newDefense += leggingsSlot.getHpBuff();
+        }
+        if (bootsSlot != null) {
+            atkBuff += bootsSlot.getAtkBuff();
+            newDefense += bootsSlot.getHpBuff();
+        }
+
+        atk += atkBuff;
+        defense = newDefense;
+
+        realhp = maxhp + defense;
     }
 
     public void addXp(long amt) {
@@ -158,14 +195,14 @@ public class Player {
     }
 
     public void removeFromInventory(Item item, long amt) {
-        for (Item v : inventory) {
-            if (v != null) {
-                if (v.itemName() == null ? item.itemName() == null : v.itemName().equals(item.itemName())) {
-                    v.removeStackAmt(amt);
-                    if (v.amount() <= 0) {
-                        v = null;
-                    }
+        for (int i = 0; i < inventory.length; i++) {
+            Item v = inventory[i];
+            if (v != null && (v.itemName() == null ? item.itemName() == null : v.itemName().equals(item.itemName()))) {
+                v.removeStackAmt(amt);
+                if (v.amount() <= 0) {
+                    inventory[i] = null;
                 }
+                break;
             }
         }
     }
@@ -177,23 +214,35 @@ public class Player {
     @SuppressWarnings("UnnecessaryReturnStatement")
     public void equip(Item item, String slot) {
         if (item instanceof Gear) {
-            if (null == slot) return; else switch (slot) {
+            if (slot == null) return; else switch (slot) {
                 case "headSlot" -> {
+                    if (headSlot != null) {
+                        addtoInventory(headSlot);
+                    }
                     headSlot = item;
                     removeFromInventory(item, 1);
                     headSlot.setStackamt(1);
                 }
                 case "chestSlot" -> {
+                    if (chestSlot != null) {
+                        addtoInventory(chestSlot);
+                    }
                     chestSlot = item;
                     removeFromInventory(item, 1);
                     chestSlot.setStackamt(1);
                 }
                 case "leggingsSlot" -> {
+                    if (leggingsSlot != null) {
+                        addtoInventory(leggingsSlot);
+                    }
                     leggingsSlot = item;
                     removeFromInventory(item, 1);
                     leggingsSlot.setStackamt(1);
                 }
                 case "bootsSlot" -> {
+                    if (bootsSlot != null) {
+                        addtoInventory(bootsSlot);
+                    }
                     bootsSlot = item;
                     removeFromInventory(item, 1);
                     bootsSlot.setStackamt(1);
@@ -203,5 +252,56 @@ public class Player {
                 }
             }
         }
+    }
+
+    @SuppressWarnings("UnnecessaryReturnStatement")
+    public void unequip(Item item, String slot) {
+        if (item instanceof Gear) {
+            if (slot == null) return; else switch (slot) {
+                case "headSlot" -> {
+                    if (headSlot != null) {
+                        addtoInventory(headSlot);
+                        headSlot = null;
+                    }
+                }
+                case "chestSlot" -> {
+                    if (chestSlot != null) {
+                        addtoInventory(chestSlot);
+                        chestSlot = null;
+                    }
+                }
+                case "leggingsSlot" -> {
+                    if (leggingsSlot != null) {
+                        addtoInventory(leggingsSlot);
+                        leggingsSlot = null;
+                    }
+                }
+                case "bootsSlot" -> {
+                    if (bootsSlot != null) {
+                        addtoInventory(bootsSlot);
+                        bootsSlot = null;
+                    }
+                }
+                default -> {
+                    return;
+                }
+            }
+        }
+    }
+
+    public Item getHeadSlot() {
+        return headSlot;
+    }
+
+    public Item getChestSlot() {
+        return chestSlot;
+    }
+
+    public Item getLeggingsSlot() {
+        return leggingsSlot;
+    }
+
+    public Item getBootsSlot() {
+        return bootsSlot;
     }
 }

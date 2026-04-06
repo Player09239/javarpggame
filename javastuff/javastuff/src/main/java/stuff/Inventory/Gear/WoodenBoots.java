@@ -2,14 +2,14 @@ package stuff.Inventory.Gear;
 
 import stuff.Inventory.BaseItemClasses.*;
 
-public class WoodenHelmet extends Helmet {
-    public WoodenHelmet(long amt) {
-        super("Wooden Helmet", amt);
+public class WoodenBoots extends Boots {
+    public WoodenBoots(long amt) {
+        super("Wooden Boots", amt);
     }
 
     @Override
     public int getHpBuff() {
-        return 6;
+        return 5;
     }
 
     @Override

@@ -30,4 +30,12 @@ public class Item {
     public void setStackamt(long amount) {
         amt = amount;
     }
+
+    public int getHpBuff() {
+        return 0;
+    }
+
+    public int getAtkBuff() {
+        return 0;
+    }
 }

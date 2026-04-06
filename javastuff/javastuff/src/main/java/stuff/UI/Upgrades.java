@@ -42,7 +42,7 @@ public class Upgrades {
             upgradeAtk(input, plr);
         } else if (choice == 3) {
             new Menu().menu(input, plr);
-        }
+        } else menu(input, plr);
     }
 
     private void upgradeHealth(Scanner input, Player plr) {

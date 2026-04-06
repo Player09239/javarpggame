@@ -26,7 +26,7 @@ public class Inventory {
 
         System.out.println("*********************************");
         System.out.println(" ");
-        System.out.println(":: Inventory ::");
+        System.out.println(":: INVENTORY ::");
 
         System.out.println(" ");
         
@@ -48,6 +48,6 @@ public class Inventory {
 
         if (choice == 1) {
             new Menu().menu(input, plr);
-        }
+        } else menu(input, plr);
     }
 }

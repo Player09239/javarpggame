@@ -20,6 +20,7 @@ public class Menu {
         System.out.println("> (3) Upgrades");
         System.out.println("> (4) Level");
         System.out.println("> (5) Inventory");
+        System.out.println("> (6) Armory");
 
         System.out.println(" ");
         System.out.println("*********************************");
@@ -36,7 +37,9 @@ public class Menu {
             new Level().menu(input, plr);
         } else if (choice == 5) {
             new Inventory().menu(input, plr);
-        }
+        } else if (choice == 6) {
+            new Armory().menu(input, plr);
+        } else menu(input, plr);
         
         input.close();
     }

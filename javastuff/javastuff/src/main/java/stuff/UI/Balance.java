@@ -12,7 +12,7 @@ public class Balance {
         System.out.println("*********************************");
         System.out.println(" ");
 
-        System.out.println(":: Balance ::");
+        System.out.println(":: BALANCE ::");
 
         System.out.println(" ");
 
@@ -30,7 +30,8 @@ public class Balance {
 
         if (choice == 1) {
             new Menu().menu(input, plr);
-        }
+        } else menu(input, plr);
+        
         input.close();
     }
 }
