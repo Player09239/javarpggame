@@ -1,0 +1,1 @@
+--module-path target/dependency --add-modules ALL-MODULE-PATH src/main/java/stuff/Main.java

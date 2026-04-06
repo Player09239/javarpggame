@@ -13,4 +13,12 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>dev.mccue</groupId>
+            <artifactId>color-terminal</artifactId>
+            <version>2024.11.20</version>
+        </dependency>
+    </dependencies>
+
 </project>
