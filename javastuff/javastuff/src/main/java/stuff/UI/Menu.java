@@ -8,6 +8,7 @@ import java.util.Scanner;
 import dev.mccue.json.Json;
 import stuff.Entities.Player;
 import stuff.Utilities.Color;
+import stuff.Utilities.Data;
 import stuff.Utilities.Util;
 
 public class Menu {
@@ -49,26 +50,9 @@ public class Menu {
         } else if (choice == 6) {
             new Armory().menu(input, plr);
         } else if (choice == 0) {
-            Json stuff = Json.objectBuilder()
-            .put("maxhp", plr.getMaxHp())
-            .put("hp", plr.getHp())
-            .put("atk", plr.getAtk())
-            .put("cash", plr.getCash())
-            .put("level", plr.getLevel())
-            .put("xp", plr.getXp())
-            .put("defense", plr.getDefense())
-            .put("realhp", plr.getRealHp())
-            .put("healthlv", plr.getHealthLv())
-            .put("attacklv", plr.getAtk())
-            .put("hpBuff", plr.getHpBuff())
-            .put("atkBuff", plr.getAtkBuff())
-            .build();
-
-            try {
-                Files.writeString(Path.of("data.json"), Json.write(stuff));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            new Data().save(plr);
+        } else if (choice == 7) {
+            new Data().load(input, plr);
         } else menu(input, plr);
         
         input.close();

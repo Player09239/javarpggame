@@ -1,5 +1,9 @@
 package stuff.Inventory.BaseItemClasses;
-public class Item {
+
+import dev.mccue.json.Json;
+import dev.mccue.json.JsonEncodable;
+
+public class Item implements JsonEncodable {
     protected String name;
     protected long amt;
 
@@ -37,5 +41,13 @@ public class Item {
 
     public int getAtkBuff() {
         return 0;
+    }
+
+    @Override
+    public Json toJson() {
+        return Json.objectBuilder()
+            .put("itemName", name)
+            .put("amount", amt)
+            .build();
     }
 }
