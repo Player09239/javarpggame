@@ -75,6 +75,14 @@ public class Player {
         return (long) ((long)(Math.random() * (max - min + 1)) + min);
     }
 
+    public long getHpBuff() {
+        return hpBuff;
+    }
+
+    public long getAtkBuff() {
+        return atkBuff;
+    }
+
     public long getAtk() {
         return minmax(atk * 0.9, atk * 1.1);
     }
@@ -93,6 +101,10 @@ public class Player {
 
     public void addCash(long amount) {
         cash += amount;
+    }
+
+    public long getRealHp() {
+        return realhp;
     }
 
     public void removeCash(long amount) {
