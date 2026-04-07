@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import stuff.Entities.Player;
 import stuff.Inventory.BaseItemClasses.Item;
+import stuff.Utilities.Color;
 import stuff.Utilities.Util;
 
 public class Inventory {
@@ -24,15 +25,15 @@ public class Inventory {
 
         
 
-        System.out.println("*********************************");
+        System.out.println(Color.whitebg("**************************************************************************************************"));
         System.out.println(" ");
-        System.out.println(":: INVENTORY ::");
+        System.out.println(Color.whitebg(">> ( INVENTORY ) <<"));
 
         System.out.println(" ");
         
         for (String line : formattedInventory) {
             if (line != null) {
-                System.out.println(line);
+                System.out.println("    " + line);
             }
         }
 
@@ -42,7 +43,7 @@ public class Inventory {
         System.out.println("> (1) Exit");
 
         System.out.println(" ");
-        System.out.println("*********************************");
+        System.out.println(Color.whitebg("**************************************************************************************************"));
 
         long choice = input.nextInt();
 

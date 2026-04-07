@@ -2,16 +2,17 @@ package stuff.UI;
 
 import java.util.Scanner;
 
-import stuff.Entities.*;
+import stuff.Entities.Player;
+import stuff.Utilities.Color;
 import stuff.Utilities.Util;
 
 public class Menu {
     public void menu(Scanner input, Player plr) {
         new Util().clearTerminal();
 
-        System.out.println("*********************************");
+        System.out.println(Color.whitebg("**************************************************************************************************"));
         System.out.println(" ");
-        System.out.println(":: MENU ::");
+        System.out.println(Color.whitebg(">> ( MENU ) <<"));
 
         System.out.println(" ");
         
@@ -23,7 +24,7 @@ public class Menu {
         System.out.println("> (6) Armory");
 
         System.out.println(" ");
-        System.out.println("*********************************");
+        System.out.println(Color.whitebg("**************************************************************************************************"));
 
         long choice = input.nextInt();
 

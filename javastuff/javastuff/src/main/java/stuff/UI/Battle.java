@@ -2,19 +2,28 @@ package stuff.UI;
 
 import java.util.Scanner;
 
-import stuff.Entities.*;
 import stuff.Entities.Bosses.FallenWarrior;
-import stuff.Entities.Mobs.*;
+import stuff.Entities.Enemy;
+import stuff.Entities.Mobs.Skeleton;
+import stuff.Entities.Mobs.Spider;
+import stuff.Entities.Mobs.Spirit;
+import stuff.Entities.Mobs.Zombie;
+import stuff.Entities.Player;
 import stuff.Inventory.BaseItemClasses.Item;
-import stuff.Inventory.Gear.*;
-import stuff.Inventory.Items.*;
-import stuff.Utilities.*;
+import stuff.Inventory.Gear.WoodenBoots;
+import stuff.Inventory.Gear.WoodenChestplate;
+import stuff.Inventory.Gear.WoodenHelmet;
+import stuff.Inventory.Gear.WoodenLeggings;
+import stuff.Utilities.Color;
+import stuff.Utilities.Util;
 
 public class Battle {
     public void menu(Scanner input, Player plr) {
-        System.out.println("*********************************");
+        new Util().clearTerminal();
+
+        System.out.println(Color.whitebg("**************************************************************************************************"));
         System.out.println(" ");
-        System.out.println(":: BATTLE ::");
+        System.out.println(Color.whitebg(">> ( BATTLE.MOB_MENU ) <<"));
 
         System.out.println(" ");
         
@@ -32,7 +41,7 @@ public class Battle {
         System.out.println("> (5) Exit");
 
         System.out.println(" ");
-        System.out.println("*********************************");
+        System.out.println(Color.whitebg("**************************************************************************************************"));
 
         long choice = input.nextInt();
 
@@ -52,10 +61,12 @@ public class Battle {
     }
 
     private void level(Scanner input, Player plr, Enemy enemy) {
-        System.out.println("*********************************");
+        new Util().clearTerminal();
+
+        System.out.println(Color.whitebg("**************************************************************************************************"));
         System.out.println(" ");
 
-        System.out.println(":: MOB LEVEL ::");
+        System.out.println(Color.whitebg(">> ( BATTLE.MOB_LEVEL ) <<"));
 
         System.out.println(" ");
 
@@ -66,8 +77,10 @@ public class Battle {
         System.out.println("> (0) Exit");
 
         System.out.println(" ");
-        System.out.println("*********************************");
+        System.out.println(Color.whitebg("**************************************************************************************************"));
         System.out.print("> ");
+
+        plr.resetHealth();
 
         long choice = input.nextInt();
 
@@ -91,10 +104,9 @@ public class Battle {
 
         String skill = "No skills";
 
-        System.out.println("*********************************");
+        System.out.println(Color.whitebg("**************************************************************************************************"));
         System.out.println(" ");
-        System.out.println(":: BATTLE ::");
-        System.out.println("A wild enemy appeared..");
+        System.out.println(Color.whitebg(">> ( BATTLE ) <<"));
 
         System.out.println(" ");
 
@@ -116,14 +128,14 @@ public class Battle {
         System.out.println("> (2) Flee");
 
         System.out.println(" ");
-        System.out.println("*********************************");
+        System.out.println(Color.whitebg("**************************************************************************************************"));
 
         long choice = input.nextInt();
         
         if (choice == 1) {
             attack(input, plr, enemy);
         } else if (choice == 2) {
-            System.out.println("*********************************");
+            System.out.println(Color.whitebg("**************************************************************************************************"));
             System.out.println(" ");
 
             System.out.println("You fled the battle.");
@@ -144,22 +156,31 @@ public class Battle {
                 enemyAction = "| " + enemy.getName() + " uses TORNADO and deals " + enemyDamage + " damage to Player";
             }
         }
+
+        long dmg = plr.getAtk();
+        double critRandom = Math.random();
+        String crit = "";
+        if (critRandom <= 0.1) {
+            dmg = plr.getCritAtk();
+            crit = " [Critical Hit]";
+        }
+
         
         plr.takeDamage(enemyDamage);
-        enemy.takeDamage(plr.getAtk());
+        enemy.takeDamage(dmg);
 
         String skill = "No skills";
 
         new Util().clearTerminal();
 
         if (plr.checkIfAlive() && enemy.checkIfAlive()) {
-            System.out.println("*********************************");
+            System.out.println(Color.whitebg("**************************************************************************************************"));
             System.out.println(" ");
-            System.out.println(":: BATTLE ::");
+            System.out.println(Color.whitebg(">> ( BATTLE ) <<"));
 
-            System.out.println(" ");
+        System.out.println(" ");
 
-            System.out.println("| Player deals " + plr.getAtk() + " damage to " + enemy.getName());
+            System.out.println("| Player deals " + dmg + " damage to " + enemy.getName() + crit);
             System.out.println(enemyAction);
 
             System.out.println(" ");
@@ -182,14 +203,14 @@ public class Battle {
             System.out.println("> (2) Flee");
 
             System.out.println(" ");
-            System.out.println("*********************************");
+            System.out.println(Color.whitebg("**************************************************************************************************"));
 
             long choice = input.nextInt();
 
             if (choice == 1) {
                 attack(input, plr, enemy);
             } else if (choice == 2) {
-                System.out.println("*********************************");
+                System.out.println(Color.whitebg("**************************************************************************************************"));
                 System.out.println(" ");
 
                 System.out.println("You fled the battle.");
@@ -199,17 +220,17 @@ public class Battle {
                 new Menu().menu(input, plr);
             } else attack(input, plr, enemy);
         } else if (!plr.checkIfAlive()) {
-            System.out.println("*********************************");
+            System.out.println(Color.whitebg("**************************************************************************************************"));
             System.out.println(" ");
-            System.out.println(":: BATTLE ::");
+            System.out.println(Color.whitebg(">> ( BATTLE ) <<"));
 
-            System.out.println(" ");
+        System.out.println(" ");
 
             System.out.println("DEFEAT. Click 1 to exit");
 
             System.out.println(" ");
 
-            System.out.println("| Player deals " + plr.getAtk() + " damage to " + enemy.getName());
+            System.out.println("| Player deals " + dmg + " damage to " + enemy.getName() + crit);
             System.out.println(enemyAction);
             System.out.println("| Player dies");
 
@@ -232,7 +253,7 @@ public class Battle {
             System.out.println("> (1) Exit");
 
             System.out.println(" ");
-            System.out.println("*********************************");
+            System.out.println(Color.whitebg("**************************************************************************************************"));
 
             long choice = input.nextInt();
 
@@ -250,9 +271,9 @@ public class Battle {
             plr.addtoInventory(new WoodenLeggings(1)); // temp
             plr.addtoInventory(new WoodenBoots(1)); // temp
 
-            System.out.println("*********************************");
+            System.out.println(Color.whitebg("**************************************************************************************************"));
             System.out.println(" ");
-            System.out.println(":: BATTLE ::");
+            System.out.println(Color.whitebg(">> ( BATTLE ) <<"));
 
             System.out.println(" ");
 
@@ -272,7 +293,7 @@ public class Battle {
 
             System.out.println(" ");
 
-            System.out.println("| Player deals " + plr.getAtk() + " damage to " + enemy.getName());
+            System.out.println("| Player deals " + dmg + " damage to " + enemy.getName() + crit);
             System.out.println("| " + enemy.getName() + " dies");
 
             System.out.println(" ");
@@ -294,7 +315,7 @@ public class Battle {
             System.out.println("> (1) Exit");
 
             System.out.println(" ");
-            System.out.println("*********************************");
+            System.out.println(Color.whitebg("**************************************************************************************************"));
 
             long choice = input.nextInt();
 

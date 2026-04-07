@@ -1,10 +1,15 @@
 package stuff.UI;
 
-import java.awt.im.InputContext;
 import java.util.Scanner;
 
 import stuff.Entities.Player;
-import stuff.Inventory.BaseItemClasses.*;
+import stuff.Inventory.BaseItemClasses.Boots;
+import stuff.Inventory.BaseItemClasses.Chestplate;
+import stuff.Inventory.BaseItemClasses.Gear;
+import stuff.Inventory.BaseItemClasses.Helmet;
+import stuff.Inventory.BaseItemClasses.Item;
+import stuff.Inventory.BaseItemClasses.Leggings;
+import stuff.Utilities.Color;
 import stuff.Utilities.Util;
 
 public class Armory {
@@ -22,10 +27,10 @@ public class Armory {
         if (leggings == null) leggings = "None";
         if (boots == null) boots = "None";
 
-        System.out.println("*********************************");
+        System.out.println(Color.whitebg("**************************************************************************************************"));
         System.out.println(" ");
 
-        System.out.println(":: ARMORY ::");
+        System.out.println(Color.whitebg(">> ( ARMORY ) <<"));
 
         System.out.println(" ");
 
@@ -40,7 +45,7 @@ public class Armory {
         System.out.println("> Unused Gear");
         for (Item v : plr.getInventory()) {
             if (v instanceof Gear) {
-                System.out.println(v.itemName() + " - x" + v.amount());
+                System.out.println("    " + v.itemName() + " - x" + v.amount());
             }
         }
 
@@ -51,7 +56,7 @@ public class Armory {
         System.out.println("> (3) Exit");
 
         System.out.println(" ");
-        System.out.println("*********************************");
+        System.out.println(Color.whitebg("**************************************************************************************************"));
 
         int choice = input.nextInt();
 
@@ -67,17 +72,17 @@ public class Armory {
     private void equippingsection(Scanner input, Player plr) {
         new Util().clearTerminal();
 
-        System.out.println("*********************************");
+        System.out.println(Color.whitebg("**************************************************************************************************"));
         System.out.println(" ");
 
-        System.out.println(":: ARMORY ::");
+        System.out.println(Color.whitebg(">> ( ARMORY.EQUIPPING_SECTION ) <<"));
 
         System.out.println(" ");
 
         System.out.println("> Unused Gear");
         for (Item v : plr.getInventory()) {
             if (v instanceof Gear) {
-                System.out.println(v.itemName() + " - x" + v.amount());
+                System.out.println("    " + v.itemName() + " - x" + v.amount());
             }
         }
 
@@ -91,7 +96,7 @@ public class Armory {
         System.out.println("> (2) Exit");
 
         System.out.println(" ");
-        System.out.println("*********************************");
+        System.out.println(Color.whitebg("**************************************************************************************************"));
 
         String response = input.nextLine();
 
@@ -158,10 +163,10 @@ public class Armory {
         if (leggings == null) leggings = "None";
         if (boots == null) boots = "None";
 
-        System.out.println("*********************************");
+        System.out.println(Color.whitebg("**************************************************************************************************"));
         System.out.println(" ");
 
-        System.out.println(":: ARMORY ::");
+        System.out.println(Color.whitebg(">> ( ARMORY.UNEQUIPPING_SECTION ) <<"));
 
         System.out.println(" ");
 
@@ -181,7 +186,7 @@ public class Armory {
         System.out.println("> (2) Exit");
 
         System.out.println(" ");
-        System.out.println("*********************************");
+        System.out.println(Color.whitebg("**************************************************************************************************"));
 
         String response = input.nextLine();
 

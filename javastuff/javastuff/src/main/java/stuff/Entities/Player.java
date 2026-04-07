@@ -2,14 +2,15 @@ package stuff.Entities;
 
 import stuff.Inventory.BaseItemClasses.Gear;
 import stuff.Inventory.BaseItemClasses.Item;
-import stuff.Utilities.*;
+import stuff.Utilities.Color;
+import stuff.Utilities.Util;
 
 public class Player {
     private long maxhp;
     private long hp;
     private long atk;
     private long cash;
-    private long level = 1;
+    private long level = 438573;
     private long xp;
     private long defense;
     private long realhp;
@@ -38,7 +39,7 @@ public class Player {
         this.atklv = 1;
     }
 
-    static String colorHp(long max, long realhp) {
+    public String colorHp(long max, long realhp) {
         double pct = (double) realhp / max * 100;
 
         if (pct > 100) {
@@ -66,8 +67,20 @@ public class Player {
         return ":: Health   " + colorHp(maxhp, realhp) + "/" + new Util().abbreviate(maxhp) + " ::";
     }
 
-    public long getAtk() {
+    public long getSolidAtk() {
         return atk;
+    }
+
+    private long minmax(double min, double max) {
+        return (long) ((long)(Math.random() * (max - min + 1)) + min);
+    }
+
+    public long getAtk() {
+        return minmax(atk * 0.9, atk * 1.1);
+    }
+
+    public long getCritAtk() {
+        return (long) Math.round(minmax(atk * 0.9, atk * 1.1) * 1.5);
     }
 
     public long getCash() {
@@ -88,6 +101,7 @@ public class Player {
 
     public void resetHealth() {
         hp = maxhp;
+        realhp = hp + defense;
     }
 
     public long getAtkLv() {

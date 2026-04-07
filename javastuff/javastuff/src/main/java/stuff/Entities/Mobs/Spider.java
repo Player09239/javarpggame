@@ -2,8 +2,7 @@ package stuff.Entities.Mobs;
 
 import stuff.Entities.Enemy;
 import stuff.Inventory.BaseItemClasses.Item;
-import stuff.Inventory.Items.RottenFlesh;
-import stuff.Inventory.Items.Wood;
+import stuff.Inventory.Items.Web;
 
 public class Spider extends Enemy {
     public Spider(long maxhp, long atk, long mincash, long maxcash) {
@@ -11,17 +10,34 @@ public class Spider extends Enemy {
     }
 
     public Item[] dropItems() {
-        int rottenFlesh = (int)(Math.random() * 4);
+        int string = (int)(Math.random() * 2);
 
-        double randomForWood = Math.random();
-        int wood;
-        if (randomForWood <= 0.25) {
-            wood = 1;
-        } else wood = 0;
+        double randomForWeb = Math.random();
+        int web;
+        if (randomForWeb <= 0.3) {
+            web = 1;
+        } else web = 0;
 
-        return new Item[] {
-            new Wood(wood),
-            new RottenFlesh(rottenFlesh)
-        };
+        Item[] loot = new Item[2];
+
+        if (string != 0) {
+            for (int i = 0; i < 2; i++) {
+                if (loot[i] == null) {
+                    loot[i] = new stuff.Inventory.Items.String(string);
+                    break;
+                }
+            }
+        }
+
+        if (web != 0) {
+            for (int i = 0; i < 2; i++) {
+                if (loot[i] == null) {
+                    loot[i] = new Web(web);
+                    break;
+                }
+            }
+        }
+
+        return loot;
     }
 }

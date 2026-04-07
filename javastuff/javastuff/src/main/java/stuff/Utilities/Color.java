@@ -95,4 +95,15 @@ public class Color {
 
         return s;
     }
+
+    public static String whitebg(String str) {
+        TerminalColor white = ANSIColor.WHITE;
+
+        String s = TerminalStyle.builder()
+            .backgroundColor(white)
+            .foregroundColor(white)
+            .apply(str);
+
+        return s;
+    }
 }
