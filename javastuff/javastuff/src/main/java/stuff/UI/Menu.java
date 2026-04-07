@@ -27,6 +27,7 @@ public class Menu {
         System.out.println("> (4) Level");
         System.out.println("> (5) Inventory");
         System.out.println("> (6) Armory");
+        System.out.println("> (7) Forge");
 
         System.out.println(" ");
 
@@ -35,25 +36,40 @@ public class Menu {
         System.out.println(" ");
         System.out.println(Color.whitebg("**************************************************************************************************"));
 
-        long choice = input.nextInt();
+        int choice = input.nextInt();
 
-        if (choice == 1) {
-            new Balance().menu(input, plr);
-        } else if (choice == 2) {
-            new Battle().menu(input, plr);
-        } else if (choice == 3) {
-            new Upgrades().menu(input, plr);
-        } else if (choice == 4) {
-            new Level().menu(input, plr);
-        } else if (choice == 5) {
-            new Inventory().menu(input, plr);
-        } else if (choice == 6) {
-            new Armory().menu(input, plr);
-        } else if (choice == 0) {
-            new Data().save(plr);
-        } else if (choice == 7) {
-            new Data().load(input, plr);
-        } else menu(input, plr);
+        switch (choice) {
+            case 1:
+                new Balance().menu(input, plr);
+                break;
+            case 2:
+                new Battle().menu(input, plr);
+                break;
+            case 3:
+                new Upgrades().menu(input, plr);
+                break;
+            case 4:
+                new Level().menu(input, plr);
+                break;
+            case 5:
+                new Inventory().menu(input, plr);
+                break;
+            case 6:
+                new Armory().menu(input, plr);
+                break;
+            case 0:
+                new Data().save(plr);
+                break;
+            case 7:
+                new Forge().menu(input, plr);
+                break;
+            case 8:
+                new Data().load(input, plr);
+                break;
+            default:
+                menu(input, plr);
+                break;
+        }
         
         input.close();
     }

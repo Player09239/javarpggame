@@ -244,6 +244,27 @@ public class Player {
         }
     }
 
+    public boolean checkForItemFromInventory(String name, long amt) {
+        boolean exists = false;
+
+        for (Item v : getInventory()) {
+            if (v != null) {
+                if (v.itemName() == name) {
+                    if (v.amount() >= amt) {
+                        exists = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return exists;
+    }
+
+    public boolean checkIfPlayerIsAliveAndHealthIsNotNegativeAndIsFightingLevel703ZombieWhilstWearingWoodenChestplateAndIsLevel28() {
+        return true;
+    }
+
     public Item[] getInventory() {
         return inventory;
     }

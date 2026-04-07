@@ -1,6 +1,7 @@
 package stuff.Inventory.Gear;
 
 import stuff.Inventory.BaseItemClasses.*;
+import stuff.Entities.*;
 
 public class WoodenBoots extends Boots {
     public WoodenBoots(long amt) {
@@ -15,5 +16,9 @@ public class WoodenBoots extends Boots {
     @Override
     public int getAtkBuff() {
         return 1;
+    }
+
+    public void craft(Player plr) {
+        
     }
 }
