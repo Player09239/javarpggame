@@ -27,10 +27,7 @@ public class Battle {
 
         System.out.println(" ");
         
-        System.out.println("> (1) Zombie");
-        System.out.println("> (2) Skeleton");
-        System.out.println("> (3) Spider");
-        System.out.println("> (4) Spirit");
+        System.out.println("> (1) Zombie   > (2) Skeleton   > (3) Spider   > (4) Spirit");
 
         System.out.println(" ");
 
@@ -48,11 +45,11 @@ public class Battle {
         if (choice == 1) {
             level(input, plr, new Zombie(90, 6, 10, 30));
         } else if (choice == 2) {
-            level(input, plr, new Skeleton(125, 9, 20, 55));
+            level(input, plr, new Skeleton(210, 12, 40, 80));
         } else if (choice == 3) {
-            level(input, plr, new Spider(110, 15, 35, 80));
+            level(input, plr, new Spider(380, 21, 70, 170));
         } else if (choice == 4) {
-            level(input, plr, new Spirit(170, 14, 57, 118));
+            level(input, plr, new Spirit(600, 25, 150, 300));
         } else if (choice == 5) {
             new Menu().menu(input, plr);
         } else if (choice == 10) {
@@ -70,7 +67,7 @@ public class Battle {
 
         System.out.println(" ");
 
-        System.out.println("Please type a level for the mob. (Min. 1)");
+        System.out.println("Please type a level for the mob. (Min. 1, Max. 2147483647)");
 
         System.out.println(" ");
         
@@ -86,7 +83,7 @@ public class Battle {
 
         if (choice == 0) {
             new Menu().menu(input, plr);
-        } else if (choice >= 1) {
+        } else if (choice >= 1 && choice <= 2147483647) {
             enemy.setLevel(choice);
             battle(input, plr, enemy);
         } else {
@@ -266,10 +263,6 @@ public class Battle {
             long xpreward = (long)((enemy.getLevel() * 1.5) + (enemy.getAtk() * 1.3));
             plr.addXp(xpreward);
             Item[] loot = enemy.dropItems();
-            plr.addtoInventory(new WoodenHelmet(1)); // temp
-            plr.addtoInventory(new WoodenChestplate(1)); // temp
-            plr.addtoInventory(new WoodenLeggings(1)); // temp
-            plr.addtoInventory(new WoodenBoots(1)); // temp
 
             System.out.println(Color.whitebg("**************************************************************************************************"));
             System.out.println(" ");
@@ -321,7 +314,7 @@ public class Battle {
 
             if (choice == 1) {
                 new Menu().menu(input, plr);
-            } else attack(input, plr, enemy);
+            } else new Menu().menu(input, plr);
         }
 
     }

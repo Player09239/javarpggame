@@ -166,8 +166,8 @@ public class Player {
     }
 
     public void scale() {
-        maxhp = (long)(100 * ((level * 1.06) * (healthlv * 1.13)));
-        atk = (long)(7 * (level * 1.06) * (atklv * 1.13));
+        maxhp = (long)(100 * (1 + (level * .12)) * (1 + (healthlv * .07)));
+        atk = (long)(7 * (1 + (level * .12)) * (1 + (atklv * .07)));
         hp = maxhp;
 
         int atkBuff = 0;

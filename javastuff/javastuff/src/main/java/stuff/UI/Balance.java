@@ -18,7 +18,7 @@ public class Balance {
         System.out.println(" ");
 
         System.out.println("> Cash");
-        System.out.println("    | $" + plr.getCash());
+        System.out.println("    | " + Color.green("$") + plr.getCash());
 
         System.out.println(" ");
 

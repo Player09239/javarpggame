@@ -13,7 +13,7 @@ public class Util {
     public String bar(long hp, long maxHp) {
         double pct = ((double) hp / maxHp) * 100;
 
-        if (pct >= 200) return Color.green("[████████████████████] 200%");
+        if (pct >= 200) return Color.cyan("[████████████████████] " + (long)pct + "%");
         if (pct >= 195) return Color.cyan("[███████████████████") + Color.green("█] ") + Color.cyan((long)pct + "%");
         if (pct >= 190) return Color.cyan("[██████████████████") + Color.green("██] ") + Color.cyan((long)pct + "%");
         if (pct >= 185) return Color.cyan("[█████████████████") + Color.green("███] ") + Color.cyan((long)pct + "%");

@@ -82,8 +82,8 @@ public class Enemy {
     } 
 
     public void scale() {
-        maxhp = (long)(maxhp * (level * 1.12));
-        atk = (long)(atk * (level * 1.12));
+        maxhp = (long)(maxhp * (1 + (level * .12)));
+        atk = (long)(atk * (1 + (level * .12)));
         mincash = (long)(mincash * (level * 1.107));
         maxcash = (long)(maxcash * (level * 1.107));
         hp = maxhp;

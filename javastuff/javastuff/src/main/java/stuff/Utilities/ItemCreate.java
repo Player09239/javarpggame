@@ -42,6 +42,36 @@ public class ItemCreate {
             case "Spirit Core" -> {
                 return new SpiritCore(amt);
             }
+            case "Bone Helmet" -> {
+                return new BoneHelmet(amt);
+            }
+            case "Bone Chestplate" -> {
+                return new BoneChestplate(amt);
+            }
+            case "Bone Leggings" -> {
+                return new BoneLeggings(amt);
+            }
+            case "Bone Boots" -> {
+                return new BoneBoots(amt);
+            }
+            case "Spiritual Helmet" -> {
+                return new SpiritualHelmet(amt);
+            }
+            case "Spiritual Chestplate" -> {
+                return new SpiritualChestplate(amt);
+            }
+            case "Spiritual Leggings" -> {
+                return new SpiritualLeggings(amt);
+            }
+            case "Spiritual Boots" -> {
+                return new SpiritualBoots(amt);
+            }
+            case "Warrior's Soul" -> {
+                return new WarriorSoul(amt);
+            }
+            case "Warrior Armor Fragment" -> {
+                return new WarriorArmorFragment(amt);
+            }
             default -> {
                 return new Item("Nothing", 0);
             }

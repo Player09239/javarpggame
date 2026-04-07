@@ -2,8 +2,7 @@ package stuff.Entities.Bosses;
 
 import stuff.Entities.*;
 import stuff.Inventory.BaseItemClasses.Item;
-import stuff.Inventory.Items.RottenFlesh;
-import stuff.Inventory.Items.Wood;
+import stuff.Inventory.Items.*;
 
 public class FallenWarrior extends Enemy {
     private long tornadoSkillCooldown = 5;
@@ -22,22 +21,39 @@ public class FallenWarrior extends Enemy {
         }
     }
 
-    public String getTornadoSkill() {
+    public java.lang.String getTornadoSkill() {
         return "(" + tornadoSkillCooldown + ") Tornado";
     }
 
     public Item[] dropItems() {
-        int rottenFlesh = (int)(Math.random() * 4);
+        int fragment = (int)(Math.random() * 4);
 
-        double randomForWood = Math.random();
-        int wood;
-        if (randomForWood <= 0.25) {
-            wood = 1;
-        } else wood = 0;
+        double randomForSoul = Math.random();
+        int soul;
+        if (randomForSoul <= 0.1) {
+            soul = 1;
+        } else soul = 0;
 
-        return new Item[] {
-            new Wood(wood),
-            new RottenFlesh(rottenFlesh)
-        };
+        Item[] loot = new Item[2];
+
+        if (fragment != 0) {
+            for (int i = 0; i < 2; i++) {
+                if (loot[i] == null) {
+                    loot[i] = new WarriorArmorFragment(fragment);
+                    break;
+                }
+            }
+        }
+
+        if (soul != 0) {
+            for (int i = 0; i < 2; i++) {
+                if (loot[i] == null) {
+                    loot[i] = new WarriorSoul(soul);
+                    break;
+                }
+            }
+        }
+
+        return loot;
     }
 }
